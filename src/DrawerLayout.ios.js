@@ -48,6 +48,7 @@ export default class DrawerLayout extends React.Component {
     onDrawerSlide: PropTypes.func,
     onDrawerStateChanged: PropTypes.func,
     renderNavigationView: PropTypes.func.isRequired,
+    overlayStyle: View.propTypes.style
   };
 
   constructor(props, context) {
@@ -101,7 +102,7 @@ export default class DrawerLayout extends React.Component {
 
   render() {
     const { openValue, drawerShown } = this.state;
-    const { drawerPosition, drawerWidth } = this.props;
+    const { drawerPosition, drawerWidth, overlayStyle } = this.props;
     const dynamicDrawerStyles = {};
     dynamicDrawerStyles[drawerPosition] = 0;
     dynamicDrawerStyles.width = drawerWidth;
@@ -139,7 +140,7 @@ export default class DrawerLayout extends React.Component {
         {drawerShown &&
           <TouchableWithoutFeedback onPress={this._onOverlayClick}>
             <Animated.View
-              style={[styles.overlay, animatedOverlayStyles]} />
+              style={[styles.overlay, animatedOverlayStyles, overlayStyle]} />
           </TouchableWithoutFeedback>
         }
         <Animated.View style={[styles.drawer, dynamicDrawerStyles, animatedDrawerStyles]}>
